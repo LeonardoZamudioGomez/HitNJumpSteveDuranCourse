@@ -339,7 +339,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -413,15 +413,15 @@ MonoBehaviour:
   isMoving: 0
   isImmune: 0
   speed: 5
-  jumpForce: 3
+  jumpForce: 7
   movHor: 0
   immuneTimeCnt: 0
   immuneTime: 0.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  radius: 0.3
-  groundRayDist: 0.5
+    m_Bits: 64
+  radius: 0.25
+  groundRayDist: 0.45
 --- !u!1 &1541169017
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 1541169020}
   - component: {fileID: 1541169019}
   - component: {fileID: 1541169018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
