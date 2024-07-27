@@ -25,9 +25,9 @@ public class User : MonoBehaviour
     public float radius = 0.3f; // Know if the user is really touching the ground.
     public float groundRayDist = 0.5f; // Know if the user is really touching the ground.
 
-    private Rigidbody2D rb;
-    private Animator anim;
-    private SpriteRenderer spr;
+    private Rigidbody2D rb; // To access the components of the object.
+    private Animator anim; // To access the components of the object.
+    private SpriteRenderer spr; // To access the components of the object.
 
     private void Awake() // Singleton Awake.
     {
