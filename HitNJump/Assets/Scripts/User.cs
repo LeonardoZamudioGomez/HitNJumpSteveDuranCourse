@@ -85,6 +85,14 @@ public class User : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    public void GetDamage() // Decrease the number of user lives.
+    {
+        lives--;
+
+        if (lives == 0)
+            this.gameObject.SetActive(false);
+    }
+
     private void OnDestroy() // Singleton OnDestroy.
     {
         obj = null;

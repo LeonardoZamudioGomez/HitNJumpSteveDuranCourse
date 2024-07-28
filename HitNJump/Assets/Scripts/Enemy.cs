@@ -58,6 +58,23 @@ public class Enemy : MonoBehaviour
         rb.velocity = new Vector2(movHor * speed, rb.velocity.y); // Vector2 = It is a set of values {x} and {y}.   
     }
 
+    void OnCollisionEnter2D(Collision2D other) // Harm the user.
+    {
+        if (other.gameObject.CompareTag("User"))
+        {
+            //Debug.Log("Harm to user"); // Message to the console that the user received damage.
+            User.obj.GetDamage(); // We call the GetDamage function with the help of the singleton of the user script.
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) // Destroy the enemy.
+    {
+        if (other.gameObject.CompareTag("User"))
+        {
+            GetKilled();
+        }
+    }
+
     private void GetKilled() // Function for when the enemy is eliminated.
     {
         gameObject.SetActive(false); // The object is deactivated.
