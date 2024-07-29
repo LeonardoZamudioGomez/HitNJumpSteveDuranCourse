@@ -93,6 +93,14 @@ public class User : MonoBehaviour
             this.gameObject.SetActive(false);
     }
 
+    public void AddLive() // Function to add lives to the user.
+    {
+        lives++;
+
+        if (lives > Game.obj.maxLives)
+            lives = Game.obj.maxLives; // If it takes more lives than we assign in maxLives, it will stay at the maximum and will not increase further.
+    }
+
     private void OnDestroy() // Singleton OnDestroy.
     {
         obj = null;
