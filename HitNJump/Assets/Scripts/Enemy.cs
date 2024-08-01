@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float movHor = 0f;
-    public float speed = 3f;
+    public float movHor = 0f; // Horizontal movement of the enemy.
+    public float speed = 3f; // // speed with which the user can move.
 
     public bool isGroundFloor = true; // Know if the user is touching the ground or not.
     public bool isGroundFront = false; // Know if the user is touching the ground or not.
 
     public LayerMask groundLayer; // We will put a layer on the ground, to know when the user touches the ground.
     public float frontGrndRayDist = 0.25f; // Know if the user is really touching the ground.
-    public float floorCheckY = 0.52f;
-    public float frontCheck = 0.51f;
-    public float frontDist = 0.001f;
+    public float floorCheckY = 0.52f; // Configuration on the object that has the enemy script so that it is detected by the ground.
+    public float frontCheck = 0.51f; // Configuration on the object that has the enemy script so that it is detected by the ground.
+    public float frontDist = 0.001f; // Configuration on the object that has the enemy script so that it is detected by the ground.
 
     public int scoreGive = 50; // How much score will the enemy give us once it is eliminated.
 
     private Rigidbody2D rb; // To access the components of the object.
-    private RaycastHit2D hit;
+    private RaycastHit2D hit; // Unity's own instruction.
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +34,9 @@ public class Enemy : MonoBehaviour
         // Avoid falling off a cliff.
         isGroundFloor = (Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - floorCheckY, transform.position.z),
             new Vector3(movHor, 0, 0), frontGrndRayDist, groundLayer)); 
+
         // What this line of code does is report if the enemy is touching the ground, if not, it changes direction (Lines 35-36-38-39).
-        if (!isGroundFloor)
+        if (isGroundFloor)
             movHor = movHor * -1;
 
         // Collision with wall.
@@ -46,11 +47,13 @@ public class Enemy : MonoBehaviour
         hit = Physics2D.Raycast(new Vector3(transform.position.x + movHor * frontCheck, transform.position.y, transform.position.z),
             new Vector3(movHor, 0, 0), frontDist);
         
-        if (hit != null)
+        if (hit != null) // Unity's own instruction.
             if (hit.transform != null)
                 if (hit.transform.CompareTag("Enemy"))
                     movHor = movHor * -1;
         
+        
+        FFlip(movHor); // The function is called to make the ENEMY object change where it moves.
     }
 
     void FixedUpdate() // To be able to manage the movement of our enemies.
@@ -73,6 +76,19 @@ public class Enemy : MonoBehaviour
         {
             GetKilled();
         }
+    }
+
+    private void FFlip(float _xValue) // Change the direction of the ENEMY where they move.
+    {
+        Vector3 theScale = transform.localScale;
+
+        if (_xValue < 0)
+            theScale.x = Mathf.Abs(theScale.x) * -1;
+        else
+        if (_xValue > 0)
+            theScale.x = Mathf.Abs(theScale.x);
+        
+        transform.localScale = theScale;
     }
 
     private void GetKilled() // Function for when the enemy is eliminated.
